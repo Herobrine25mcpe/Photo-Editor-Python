@@ -6,6 +6,9 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.widget import Widget
 
 
+# this is the main class
+
+
 class MyGridLayout(Widget):
     def press(self):
         name = self.name.text
@@ -18,4 +21,3 @@ class Testapp(App):
 
 if __name__ == "__main__":
     Testapp().run()
-
