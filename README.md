@@ -21,4 +21,5 @@ Step 3: install kivy in the Pycharm using python packages OR install it by using
    kivy_examples in the directory where you made the virtual environment.
 
 Step 4: paste the two files .py and .kv in the same directory.
+
 Step 5: run the code and enjoy.
