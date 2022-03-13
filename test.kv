@@ -1,0 +1,65 @@
+<MyGridLayout>
+
+    BoxLayout:
+        cols:2
+        size: root.width, root.height
+
+        BoxLayout:
+
+            orientation:"horizontal"
+            size_hint: (.5,1)
+
+
+            Button:
+                text: "Grid1"
+                size_hint: (.1,1)
+
+
+            Button:
+                text: "Grid2"
+                size_hint: (.25,1)
+
+
+            Button:
+                text: "Grid3"
+                size_hint: (.35,1)
+
+        BoxLayout:
+            orientation: "vertical"
+
+            BoxLayout:
+                orientation: "horizontal"
+
+                padding: 10
+                spacing: 10
+
+                Button:
+                    text: "Box1"
+                    size_hint: (.5,1)
+
+                Button:
+                    text: "Box2"
+                    size_hint: (.5,1)
+
+
+            Button:
+
+                text: "Box3"
+                pos_hint: {'center_x':0.5}
+                size_hint: (0.97,0.3)
+
+            BoxLayout:
+                orientation: "horizontal"
+                padding: 10
+                spacing: 10
+                Button:
+                    text: "Box4"
+                    size_hint: (.8,1)
+
+                Button:
+                    text: "Box5"
+                    size_hint: (.2,1)
+                    background_normal:''
+                    background_color:(0,0,1,0.5)
+
+
