@@ -5,7 +5,9 @@ This is the Photo Edtior project in python with additional functionality of colo
 #Instruction:
 
 Step 1: Install python 3.9 becuase as of now (March 2022) Kivy don't like python 3.10 very much.
+
 Step 2: Install Pycharm for ease as it creates a virtual enviroment of its own, because if you don't things will get real messy really quick.
+
 Step 2.5: If you refuse to install Pycharm use virtual environment in python.
 
               > python -m pip install --upgrade pip setuptools virtualenv
