@@ -18,9 +18,8 @@ Step 2.5: If you refuse to install Pycharm use virtual environment in python.
               
 Step 3: install kivy in the Pycharm using python packages OR install it by using
 
-               > python -m pip install --pre "kivy[full]" 
-            
-   kivy_examples in the directory where you made the virtual environment.
+               > python -m pip install --pre "kivy[full]" kivy_examples
+   in the directory where you made the virtual environment.
 
 Step 4: paste the two files .py and .kv in the same directory.
 
