@@ -6,7 +6,7 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.widget import Widget
 
 
-# this is the main class
+# this is the main grid
 
 
 class MyGridLayout(Widget):
