@@ -1,4 +1,4 @@
-<MyGridLayout>
+<MainLayout>
 
     BoxLayout:
         cols:2
@@ -6,23 +6,27 @@
 
         BoxLayout:
 
-            orientation:"horizontal"
-            size_hint: (.5,1)
-
+            size_hint: (.05,1)
 
             Button:
                 text: "Grid1"
                 size_hint: (.1,1)
 
+        BoxLayout:
+
+            orientation:"horizontal"
+            size_hint: (.4,1)
+            padding: 8
+
 
             Button:
                 text: "Grid2"
-                size_hint: (.25,1)
-
+                size_hint: (.5,1)
 
             Button:
                 text: "Grid3"
-                size_hint: (.35,1)
+                size_hint: (.85,1)
+
 
         BoxLayout:
             orientation: "vertical"
@@ -30,7 +34,7 @@
             BoxLayout:
                 orientation: "horizontal"
 
-                padding: 10
+                padding: 8
                 spacing: 10
 
                 Button:
@@ -41,25 +45,65 @@
                     text: "Box2"
                     size_hint: (.5,1)
 
+            BoxLayout:
+                orientation: "horizontal"
+                cols:2
+                size_hint: (1,0.5)
+                padding: 10
+                spacing: 10
 
-            Button:
+                FloatLayout:
+                    Button:
+                        text: "Box31"
+                        size_hint:(0.85,1)
+                        pos_hint: {"x":0.001, "y":0.02}
 
-                text: "Box3"
-                pos_hint: {'center_x':0.5}
-                size_hint: (0.97,0.3)
+                    RoundButton:
+                        pos_hint: {"x":0.88, "y":0.7}
+                        text: "Box321"
+                        outline_color: (0,0,0)
+                        outline_width: 1
+                        size_hint: (.1,0.2)
+
+                    RoundButton:
+                        pos_hint: {"x":0.88, "y":0.4}
+                        text: "Box322"
+                        outline_color: (0,0,0)
+                        outline_width: 1
+                        size_hint: (.1,0.2)
+
+                    RoundButton:
+                        pos_hint: {"x":0.88, "y":0.1}
+                        text: "Box323"
+                        outline_color: (0,0,0)
+                        outline_width: 1
+                        size_hint: (.1,0.2)
 
             BoxLayout:
                 orientation: "horizontal"
                 padding: 10
                 spacing: 10
+
                 Button:
                     text: "Box4"
                     size_hint: (.8,1)
 
                 Button:
                     text: "Box5"
+                    outline_color: (0,0,0)
+                    outline_width: 1
                     size_hint: (.2,1)
                     background_normal:''
-                    background_color:(0,0,1,0.5)
+                    background_color:(0,1,1,0.5)
 
+<RoundButton@Button>
 
+    background_normal: ''
+    background_color:(0,0,0,0)
+    canvas.before:
+        Color:
+            rgba:(0,1,1,0.5)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius:[10]
