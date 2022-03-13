@@ -12,9 +12,13 @@ Step 2.5: If you refuse to install Pycharm use virtual environment in python.
               > python -m virtualenv kivy_venv
               > kivy_venv\Scripts\activate
               
-              And this is how you create a virtual environment in python, Thank you.
+   And this is how you create a virtual environment in python, Thank you.
               
-Step 3: install kivy in the Pycharm using python packages OR install it by using > python -m pip install --pre "kivy[full]" kivy_examples in the directory where you made         the virtual environment.
+Step 3: install kivy in the Pycharm using python packages OR install it by using
+
+               > python -m pip install --pre "kivy[full]" 
+            
+   kivy_examples in the directory where you made the virtual environment.
 
 Step 4: paste the two files .py and .kv in the same directory.
 Step 5: run the code and enjoy.
