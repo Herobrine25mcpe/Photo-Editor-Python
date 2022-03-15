@@ -1,5 +1,11 @@
+
+
 import kivy
 import io
+import time
+import os
+import numpy as np
+import cv2
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.widget import Widget
@@ -22,7 +28,55 @@ class FullImage(Image):
 
 bgcolor = (0.54, 0.54, 0.54, 1)
 
+
+def colorizer(file):
+    print("loading models.....")
+    net = cv2.dnn.readNetFromCaffe('./models/colorization_deploy_v2.prototxt','./models/colorization_release_v2.caffemodel')
+    pts = np.load('./models/pts_in_hull.npy')
+
+
+    class8 = net.getLayerId("class8_ab")
+    conv8 = net.getLayerId("conv8_313_rh")
+    pts = pts.transpose().reshape(2,313,1,1)
+
+    net.getLayer(class8).blobs = [pts.astype("float32")]
+    net.getLayer(conv8).blobs = [np.full([1,313],2.606,dtype='float32')]
+
+
+    image = cv2.imread(file)
+    scaled = image.astype("float32")/255.0
+    lab = cv2.cvtColor(scaled,cv2.COLOR_BGR2LAB)
+
+
+    resized = cv2.resize(lab,(224,224))
+    L = cv2.split(resized)[0]
+    L -= 50
+
+
+    net.setInput(cv2.dnn.blobFromImage(L))
+    ab = net.forward()[0, :, :, :].transpose((1,2,0))
+
+    ab = cv2.resize(ab, (image.shape[1],image.shape[0]))
+
+    L = cv2.split(lab)[0]
+    colorized = np.concatenate((L[:,:,np.newaxis], ab), axis=2)
+
+    colorized = cv2.cvtColor(colorized,cv2.COLOR_LAB2BGR)
+    colorized = np.clip(colorized,0,1)
+
+    colorized = (255 * colorized).astype("uint8")
+
+    print("done")
+    filename="colorized.jpg"
+
+    cv2.imwrite(filename, colorized)
+
+
 def saver(f):
+    try:
+        os.remove("newimg.jpg")
+    except:
+        pass
     fmagex = f[0]
     f = open(fmagex,'rb')
     newimg = open('newimg.jpg','wb')
@@ -34,6 +88,7 @@ def saver(f):
 class MainLayout(Widget):
     # Image Selector Function
     def selected(self, filename):
+
         saver(filename)
 
         try:
@@ -42,10 +97,15 @@ class MainLayout(Widget):
             pass
 
     def apply(self):
-        try:
-            self.ids.image2.source = 'newimg.jpg'
-        except:
-            pass
+
+        im = 'newimg.jpg'
+        colorizer(im)
+
+        self.ids.image2.source = 'colorized.jpg'
+        os.remove("colorized.jpg")
+        os.remove("newimg.jpg")
+
+
 
     def preview(self):
         try:
