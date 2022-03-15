@@ -1,4 +1,5 @@
 import kivy
+import io
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.widget import Widget
@@ -12,7 +13,7 @@ from kivy.uix.image import Image
 Builder.load_file('test_kv.kv')
 
 global fimage
-fmagex = "images/img1.jpg"
+fmagex = ""
 
 
 class FullImage(Image):
@@ -21,10 +22,19 @@ class FullImage(Image):
 
 bgcolor = (0.54, 0.54, 0.54, 1)
 
+def saver(f):
+    fmagex = f[0]
+    f = open(fmagex,'rb')
+    newimg = open('newimg.jpg','wb')
+    for line in f:
+        newimg.write(line)
+
+
 
 class MainLayout(Widget):
     # Image Selector Function
     def selected(self, filename):
+        saver(filename)
 
         try:
             self.ids.image1.source = filename[0]
@@ -33,13 +43,14 @@ class MainLayout(Widget):
 
     def apply(self):
         try:
-            self.ids.image2.source = fmagex
+            self.ids.image2.source = 'newimg.jpg'
         except:
             pass
 
     def preview(self):
         try:
             self.ids.image2.source = fmagex
+
         except:
             pass
 
