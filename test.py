@@ -12,15 +12,25 @@ from kivy.uix.floatlayout import FloatLayout
 
 # this is the main grid
 
-Builder.load_file('test.kv')
+Builder.load_file('test_kv.kv')
+
 
 class MainLayout(Widget):
+    def selected(self, filename):
+        try:
+            self.ids.image1.source = filename[0]
+
+        except:
+            pass
+
+
+class FullImage(Image):
     pass
 
 
 class Testapp(App):
     def build(self):
-        Window.clearcolor = (9/255, 24/255, 77/255, 1)
+        Window.clearcolor = (0.54, 0.54, 0.54, 1)
         return MainLayout()
 
 
