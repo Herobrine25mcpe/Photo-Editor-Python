@@ -51,15 +51,11 @@
 
                     size_hint: (.5,1)
 
-                Label:
-                    text: "Box2"
-                    background_color:(0,0,0,0.3)
-                    canvas.before:
-                        Color:
-                            rgba :self.background_color
-                        Rectangle:
-                            size: self.size
-                            pos: self.pos
+                FullImage:
+                    #Box1
+                    id: image2
+
+                    source: ""
 
                     size_hint: (.5,1)
 
@@ -77,25 +73,31 @@
                         pos_hint: {"x":0.001, "y":0.02}
 
                     RoundButton:
+                        #Box321
                         pos_hint: {"x":0.88, "y":0.7}
-                        text: "Box321"
+                        text: "Download"
                         outline_color: (0,0,0)
                         outline_width: 1
                         size_hint: (.1,0.2)
+                        on_press: root.download()
 
                     RoundButton:
+                        #Box322
                         pos_hint: {"x":0.88, "y":0.4}
-                        text: "Box322"
+                        text: "Preview"
                         outline_color: (0,0,0)
                         outline_width: 1
                         size_hint: (.1,0.2)
+                        on_press: root.preview()
 
                     RoundButton:
+                        #Box323
                         pos_hint: {"x":0.88, "y":0.1}
-                        text: "Box323"
+                        text: "Apply"
                         outline_color: (0,0,0)
                         outline_width: 1
                         size_hint: (.1,0.2)
+                        on_press: root.apply()
 
             BoxLayout:
                 orientation: "horizontal"
