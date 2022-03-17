@@ -1,5 +1,4 @@
 
-
 import kivy
 import io
 import time
@@ -73,10 +72,6 @@ def colorizer(file):
 
 
 def saver(f):
-    try:
-        os.remove("newimg.jpg")
-    except:
-        pass
     fmagex = f[0]
     f = open(fmagex,'rb')
     newimg = open('newimg.jpg','wb')
@@ -102,9 +97,6 @@ class MainLayout(Widget):
         colorizer(im)
 
         self.ids.image2.source = 'colorized.jpg'
-        os.remove("colorized.jpg")
-        os.remove("newimg.jpg")
-
 
 
     def preview(self):
@@ -116,7 +108,12 @@ class MainLayout(Widget):
 
     def download(self):
         try:
-            self.ids.image2.source = fmagex
+            fmagex = self.ids.image2.source
+            print(fmagex)
+            f = open(fmagex, 'rb')
+            newimg = open('colimg.jpg', 'wb')
+            for line in f:
+                newimg.write(line)
         except:
             pass
 
@@ -127,8 +124,15 @@ class MainLayout(Widget):
 class Testapp(App):
     def build(self):
         Window.clearcolor = bgcolor
+
+
         return MainLayout()
 
 
 if __name__ == "__main__":
     Testapp().run()
+    try:
+        os.remove("colorized.jpg")
+        os.remove("newimg.jpg")
+    except:
+        pass
