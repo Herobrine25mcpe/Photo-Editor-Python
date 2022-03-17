@@ -5,6 +5,7 @@ import time
 import os
 import numpy as np
 import cv2
+import random
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.widget import Widget
@@ -13,13 +14,12 @@ from kivy.lang import Builder
 from kivy.uix.image import Image
 
 
-# this is the main grid
-
 Builder.load_file('test_kv.kv')
 
-global fimage
 fmagex = ""
 
+
+count = 0
 
 class FullImage(Image):
     pass
@@ -67,41 +67,56 @@ def colorizer(file):
 
     print("done")
     filename="colorized.jpg"
-
     cv2.imwrite(filename, colorized)
+    return filename
+
+
 
 
 def saver(f):
-    fmagex = f[0]
-    f = open(fmagex,'rb')
-    newimg = open('newimg.jpg','wb')
-    for line in f:
-        newimg.write(line)
+    try:
+        fmagex = f[0]
+        f = open(fmagex,'rb')
+        newimg = open('newimg.jpg','wb')
+        for line in f:
+            newimg.write(line)
+    except:
+        pass
 
 
 
 class MainLayout(Widget):
     # Image Selector Function
+
     def selected(self, filename):
 
         saver(filename)
-
         try:
+            print(filename)
             self.ids.image1.source = filename[0]
+            self.ids.image2.source = ''
         except:
             pass
 
     def apply(self):
 
-        im = 'newimg.jpg'
-        colorizer(im)
+        im = "newimg.jpg"
+        im = colorizer(im)
 
-        self.ids.image2.source = 'colorized.jpg'
+        try:
+            self.ids.image2.source = im
+
+
+
+        except:
+            print("hi")
 
 
     def preview(self):
         try:
-            self.ids.image2.source = fmagex
+            self.ids.image2.source = ""
+            self.ids.image1.source = ""
+
 
         except:
             pass
@@ -111,7 +126,7 @@ class MainLayout(Widget):
             fmagex = self.ids.image2.source
             print(fmagex)
             f = open(fmagex, 'rb')
-            newimg = open('colimg.jpg', 'wb')
+            newimg = open('col-img.jpg', 'wb')
             for line in f:
                 newimg.write(line)
         except:
