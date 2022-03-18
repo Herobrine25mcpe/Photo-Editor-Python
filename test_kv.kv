@@ -106,9 +106,90 @@
                 padding: 10
                 spacing: 10
 
-                Button:
-                    text: "Box4"
-                    size_hint: (.8,1)
+                FloatLayout:
+                    orientation: "vertical"
+                    size_hint:(0.15,1)
+
+                    Label:
+                        pos_hint: {"x":0.3, "y":0.80}
+                        size_hint: (.1,0.2)
+                        text: "Saturation"
+
+                    Label:
+                        pos_hint: {"x":0.3, "y":0.62}
+                        size_hint: (.1,0.2)
+                        text: "Brightness"
+
+                    Label:
+                        pos_hint: {"x":0.23, "y":0.44}
+                        size_hint: (.1,0.2)
+                        text: "Contrast"
+
+                    Label:
+                        pos_hint: {"x":0.35, "y":0.26}
+                        size_hint: (.1,0.2)
+                        text: "Smoothness"
+
+                    Label:
+                        pos_hint: {"x":0.25, "y":0.08}
+                        size_hint: (.1,0.2)
+                        text: "Sharpness"
+
+
+                FloatLayout:
+
+
+                    Slider:
+                        id:saturation_slider
+                        pos_hint: {"x":0, "y":0.80}
+                        min:1
+                        max:100
+                        step:5
+                        size_hint: (.4,0.2)
+
+                        on_value: root.slide_it(*args)
+
+                    Slider:
+                        pos_hint: {"x":0, "y":0.62}
+                        min:1
+                        max:100
+                        step:5
+                        size_hint: (.4,0.2)
+                        on_value: root.slide_it(*args)
+
+                    Slider:
+                        pos_hint: {"x":0, "y":0.44}
+                        min:1
+                        max:100
+                        step:5
+                        size_hint: (.4,0.2)
+                        on_value: root.slide_it(*args)
+
+                    Slider:
+                        pos_hint: {"x":0, "y":0.26}
+                        min:1
+                        max:100
+                        step:5
+                        size_hint: (.4,0.2)
+                        on_value: root.slide_it(*args)
+
+                    Slider:
+                        pos_hint: {"x":0, "y":0.8}
+                        min:1
+                        max:100
+                        step:5
+                        size_hint: (.4,0.2)
+                        on_value: root.slide_it(*args)
+
+                    Slider:
+                        pos_hint: {"x":0, "y":0.08}
+                        min:1
+                        max:100
+                        step:5
+                        size_hint: (.4,0.2)
+                        on_value: root.slide_it(*args)
+
+
 
                 Button:
                     text: "Box5"
@@ -117,6 +198,9 @@
                     size_hint: (.2,1)
                     background_normal:''
                     background_color:(0,1,1,0.5)
+
+
+
 
 <RoundButton@Button>
 

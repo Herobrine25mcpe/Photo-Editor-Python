@@ -7,6 +7,7 @@ import numpy as np
 import cv2
 import random
 from kivy.app import App
+from kivy.properties import ColorProperty
 from kivy.uix.label import Label
 from kivy.uix.widget import Widget
 from kivy.core.window import Window
@@ -17,15 +18,20 @@ from kivy.uix.image import Image
 Builder.load_file('test_kv.kv')
 
 fmagex = ""
-
-
-count = 0
+theme = "w"
 
 class FullImage(Image):
     pass
 
 
-bgcolor = (0.54, 0.54, 0.54, 1)
+def theme(theme):
+    print("bgcol")
+    if theme=="w":
+        bgcolor = (0.54, 0.54, 0.54, 1)
+    if theme=="d":
+        bgcolor = (0.14, 0.14, 0.14, 1)
+
+    Window.clearcolor = bgcolor
 
 
 def colorizer(file):
@@ -105,19 +111,16 @@ class MainLayout(Widget):
 
         try:
             self.ids.image2.source = im
-
-
-
         except:
-            print("hi")
+            print("error")
 
 
     def preview(self):
         try:
             self.ids.image2.source = ""
             self.ids.image1.source = ""
-
-
+            bgcol="d"
+            theme(bgcol)
         except:
             pass
 
@@ -132,13 +135,17 @@ class MainLayout(Widget):
         except:
             pass
 
+    def slide_it(self, *args):
+        print(args)
+
 
 
 
 
 class Testapp(App):
     def build(self):
-        Window.clearcolor = bgcolor
+
+
 
 
         return MainLayout()
