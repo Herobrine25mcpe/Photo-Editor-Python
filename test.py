@@ -138,7 +138,19 @@ class MainLayout(Widget):
     def slide_it(self, *args):
         print(args)
 
-
+    def satu_slider(self, *args):
+        x= self.ids.image2.source
+        img= cv2.imread(x)
+        imghsv= cv2.cvtColor(img, cv2.COLOR_BGR2HSV).astype('float32')
+        h,s,v = cv2.split(imghsv)
+        s=s * (int(args[1])/5)
+        s = np.clip(s,0,255)
+        imghsv = cv2.merge([h,s,v])
+        saturated = cv2.cvtColor(imghsv.astype('uint8'),cv2.COLOR_HSV2BGR)
+        cv2.imwrite("saturated.jpg",saturated)
+        print("hi")
+        self.ids.image2.source = 'saturated.jpg'
+        os.remove("saturated.jpg")
 
 class Testapp(App):
     def build(self):
