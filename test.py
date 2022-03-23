@@ -27,7 +27,7 @@ class FullImage(Image):
 def theme(theme):
     print("bgcol")
     if theme=="w":
-        bgcolor = (0.54, 0.54, 0.54, 1)
+        bgcolor = (0.84, 0.84, 0.84, 1)
     if theme=="d":
         bgcolor = (0.14, 0.14, 0.14, 1)
 
@@ -119,7 +119,7 @@ class MainLayout(Widget):
         try:
             self.ids.image2.source = ""
             self.ids.image1.source = ""
-            bgcol="d"
+            bgcol="w"
             theme(bgcol)
         except:
             pass
@@ -140,14 +140,8 @@ class MainLayout(Widget):
 
 
 
-
-
 class Testapp(App):
     def build(self):
-
-
-
-
         return MainLayout()
 
 
