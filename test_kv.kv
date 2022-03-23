@@ -141,7 +141,7 @@
                 FloatLayout:
 
                     Slider:
-                        id:saturation_slider
+                        id:Brightness_slider
                         pos_hint: {"x":0, "y":0.62}
                         min:1
                         max:100
@@ -159,7 +159,7 @@
                         on_value:root.slide_it(*args)
 
                     Slider:
-                        id:contrast_slider
+                        id:smoothness_slider
                         pos_hint: {"x":0, "y":0.26}
                         min:1
                         max:100
@@ -168,13 +168,13 @@
                         on_value: root.slide_it(*args)
 
                     Slider:
-                        id:smooth_slider
+                        id:saturation_slider
                         pos_hint: {"x":0, "y":0.8}
                         min:1
                         max:100
                         step:1
                         size_hint: (.4,0.2)
-                        on_value: root.slide_it(*args)
+                        on_value:root.slide_it(*args)
 
                     Slider:
                         id:sharp_slider
