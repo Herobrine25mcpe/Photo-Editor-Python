@@ -89,12 +89,13 @@ def saver(f):
     except:
         pass
 
-def saturation(c):
+def saturation(u):
     x = "colorized.jpg"
     img = cv2.imread(x)
     imghsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV).astype('float32')
     h, s, v = cv2.split(imghsv)
-    s = s * (int(c))
+    s = s * (int(u))
+    print(s)
     s = np.clip(s, 0, 255)
     imghsv = cv2.merge([h, s, v])
     saturated = cv2.cvtColor(imghsv.astype('uint8'), cv2.COLOR_HSV2BGR)
@@ -106,12 +107,24 @@ def brightness(b):
         x = "colorized.jpg"
         img = cv2.imread(x)
         beta = b
+        print(beta)
         bright = cv2.convertScaleAbs(img,alpha=1,beta=beta)
         cv2.imwrite("colorized.jpg", bright)
         print("done")
     except:
         print("brightness error")
 
+def contrast(c):
+    try:
+        x = "colorized.jpg"
+        img = cv2.imread(x)
+        alpha = c/100
+        print(alpha)
+        contrast = cv2.convertScaleAbs(img, alpha=alpha,beta=1)
+        cv2.imwrite("colorized.jpg", contrast)
+        print("done")
+    except:
+        print("contrast error")
 
 
 class MainLayout(Widget):
@@ -170,13 +183,20 @@ class MainLayout(Widget):
         print(args)
 
     def bright_slider(self, *args):
+
         x = int(args[1])
         brightness(x)
+
+    def cont_slider(self,*args):
+
+        x = int(args[1])
+        contrast(x)
+
 
     def satu_slider(self, *args):
 
 
-        x= int(args[1])/10
+        x= float(args[1])/10
         print(x)
         saturation(x)
 
