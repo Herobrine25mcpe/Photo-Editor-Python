@@ -135,7 +135,7 @@
                     Label:
                         pos_hint: {"x":0.25, "y":0.08}
                         size_hint: (.1,0.2)
-                        text: "Sharpness"
+                        text: "Hue"
 
 
                 FloatLayout:
@@ -177,13 +177,13 @@
                         on_value:root.satu_slider(*args)
 
                     Slider:
-                        id:sharp_slider
+                        id:hue_slider
                         pos_hint: {"x":0, "y":0.08}
                         min:1
                         max:100
                         step:1
                         size_hint: (.4,0.2)
-                        on_value: root.slide_it(*args)
+                        on_value: root.hue_slider(*args)
 
 
 
