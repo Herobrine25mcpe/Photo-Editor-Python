@@ -89,6 +89,29 @@ def saver(f):
     except:
         pass
 
+def saturation(c):
+    x = "colorized.jpg"
+    img = cv2.imread(x)
+    imghsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV).astype('float32')
+    h, s, v = cv2.split(imghsv)
+    s = s * (int(c))
+    s = np.clip(s, 0, 255)
+    imghsv = cv2.merge([h, s, v])
+    saturated = cv2.cvtColor(imghsv.astype('uint8'), cv2.COLOR_HSV2BGR)
+    cv2.imwrite("colorized.jpg", saturated)
+    print("done")
+
+def brightness(b):
+    try:
+        x = "colorized.jpg"
+        img = cv2.imread(x)
+        beta = b
+        bright = cv2.convertScaleAbs(img,alpha=1,beta=beta)
+        cv2.imwrite("colorized.jpg", bright)
+        print("done")
+    except:
+        print("brightness error")
+
 
 
 class MainLayout(Widget):
@@ -97,6 +120,8 @@ class MainLayout(Widget):
     def selected(self, filename):
 
         saver(filename)
+        im = "newimg.jpg"
+        im = colorizer(im)
         try:
             print(filename)
             self.ids.image1.source = filename[0]
@@ -106,11 +131,17 @@ class MainLayout(Widget):
 
     def apply(self):
 
-        im = "newimg.jpg"
-        im = colorizer(im)
-
         try:
+            im="colorized.jpg"
+
+            try:
+                self.ids.image2.source.reload()
+            except:
+                print("couldn't reload")
+
             self.ids.image2.source = im
+
+
         except:
             print("error")
 
@@ -138,19 +169,34 @@ class MainLayout(Widget):
     def slide_it(self, *args):
         print(args)
 
+    def bright_slider(self, *args):
+        x = int(args[1])
+        brightness(x)
+
     def satu_slider(self, *args):
-        x= self.ids.image2.source
-        img= cv2.imread(x)
-        imghsv= cv2.cvtColor(img, cv2.COLOR_BGR2HSV).astype('float32')
-        h,s,v = cv2.split(imghsv)
-        s=s * (int(args[1])/5)
-        s = np.clip(s,0,255)
-        imghsv = cv2.merge([h,s,v])
-        saturated = cv2.cvtColor(imghsv.astype('uint8'),cv2.COLOR_HSV2BGR)
-        cv2.imwrite("saturated.jpg",saturated)
+
+
+        x= int(args[1])/10
+        print(x)
+        saturation(x)
+
+    """
+        x = self.ids.image2.source
+        print(x)
+        img = cv2.imread(x)
+        imghsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV).astype('float32')
+        h, s, v = cv2.split(imghsv)
+        s = s * (int(args[1]) / 10)
+        s = np.clip(s, 0, 255)
+        imghsv = cv2.merge([h, s, v])
+        saturated = cv2.cvtColor(imghsv.astype('uint8'), cv2.COLOR_HSV2BGR)
+        cv2.imwrite("saturated.jpg", saturated)
         print("hi")
-        self.ids.image2.source = 'saturated.jpg'
-        os.remove("saturated.jpg")
+        self.ids.image2.source= "saturated.jpg"
+        os.remove("saturated.jpg")"""
+
+
+
 
 class Testapp(App):
     def build(self):
@@ -160,7 +206,7 @@ class Testapp(App):
 if __name__ == "__main__":
     Testapp().run()
     try:
-        os.remove("colorized.jpg")
+        #os.remove("colorized.jpg")
         os.remove("newimg.jpg")
     except:
         pass
