@@ -90,17 +90,20 @@ def saver(f):
         pass
 
 def saturation(u):
-    x = "colorized.jpg"
-    img = cv2.imread(x)
-    imghsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV).astype('float32')
-    h, s, v = cv2.split(imghsv)
-    s = s * (int(u))
-    print(s)
-    s = np.clip(s, 0, 255)
-    imghsv = cv2.merge([h, s, v])
-    saturated = cv2.cvtColor(imghsv.astype('uint8'), cv2.COLOR_HSV2BGR)
-    cv2.imwrite("colorized.jpg", saturated)
-    print("done")
+    try:
+        x = "colorized.jpg"
+        img = cv2.imread(x)
+        imghsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV).astype('float32')
+        h, s, v = cv2.split(imghsv)
+        s = s * (int(u))
+        print(s)
+        s = np.clip(s, 0, 255)
+        imghsv = cv2.merge([h, s, v])
+        saturated = cv2.cvtColor(imghsv.astype('uint8'), cv2.COLOR_HSV2BGR)
+        cv2.imwrite("colorized.jpg", saturated)
+        print("done")
+    except:
+        print("saturation error")
 
 def brightness(b):
     try:
@@ -135,11 +138,25 @@ def hue(e):
         h = h * (int(e))
         h = np.clip(s, 0, 255)
         imghsv = cv2.merge([h, s, v])
-        saturated = cv2.cvtColor(imghsv.astype('uint8'), cv2.COLOR_HSV2BGR)
-        cv2.imwrite("colorized.jpg", saturated)
+        hueed = cv2.cvtColor(imghsv.astype('uint8'), cv2.COLOR_HSV2BGR)
+        cv2.imwrite("colorized.jpg", hueed)
         print("done")
     except:
         print("hue error")
+
+def smooth(s):
+    try:
+        x = "colorized.jpg"
+        img = cv2.imread(x)
+        sigmas = s*2
+        sigmar = s/100
+        print(sigmar, sigmas)
+        smth= cv2.edgePreservingFilter(img,cv2.RECURS_FILTER, sigmas, sigmar)
+        cv2.imwrite("colorized.jpg",smth)
+        print("done")
+    except:
+        print("smooth error")
+
 
 
 class MainLayout(Widget):
@@ -211,6 +228,12 @@ class MainLayout(Widget):
 
         x = int(args[1])/10
         hue(x)
+
+    def smooth_slider(self, *args):
+
+        x = int(args[1])
+        smooth(x)
+
 
     def satu_slider(self, *args):
 
