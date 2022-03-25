@@ -13,6 +13,7 @@ from kivy.uix.widget import Widget
 from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.uix.image import Image
+from kivy.clock import Clock
 
 
 Builder.load_file('test_kv.kv')
@@ -144,6 +145,7 @@ def hue(e):
     except:
         print("hue error")
 
+
 def smooth(s):
     try:
         x = "colorized.jpg"
@@ -160,7 +162,7 @@ def smooth(s):
 
 
 class MainLayout(Widget):
-    # Image Selector Function
+
 
     def selected(self, filename):
 
@@ -176,19 +178,14 @@ class MainLayout(Widget):
 
     def apply(self):
 
-        try:
             im="colorized.jpg"
 
             try:
-                self.ids.image2.source.reload()
+                self.ids.image2.reload()
             except:
-                print("couldn't reload")
+                print("coudln't reload")
 
             self.ids.image2.source = im
-
-
-        except:
-            print("error")
 
 
     def preview(self):
@@ -210,6 +207,9 @@ class MainLayout(Widget):
                 newimg.write(line)
         except:
             pass
+
+    def update_image(self, dt):
+        self.ids.image2.source.reload()
 
     def slide_it(self, *args):
         print(args)
@@ -241,22 +241,6 @@ class MainLayout(Widget):
         x= int(args[1])/10
         saturation(x)
 
-    """
-        x = self.ids.image2.source
-        print(x)
-        img = cv2.imread(x)
-        imghsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV).astype('float32')
-        h, s, v = cv2.split(imghsv)
-        s = s * (int(args[1]) / 10)
-        s = np.clip(s, 0, 255)
-        imghsv = cv2.merge([h, s, v])
-        saturated = cv2.cvtColor(imghsv.astype('uint8'), cv2.COLOR_HSV2BGR)
-        cv2.imwrite("saturated.jpg", saturated)
-        print("hi")
-        self.ids.image2.source= "saturated.jpg"
-        os.remove("saturated.jpg")"""
-
-
 
 
 class Testapp(App):
@@ -267,7 +251,7 @@ class Testapp(App):
 if __name__ == "__main__":
     Testapp().run()
     try:
-        #os.remove("colorized.jpg")
+        os.remove("colorized.jpg")
         os.remove("newimg.jpg")
     except:
         pass
