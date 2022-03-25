@@ -16,10 +16,11 @@ from kivy.uix.image import Image
 from kivy.clock import Clock
 
 
+
 Builder.load_file('test_kv.kv')
 
 fmagex = ""
-theme = "w"
+
 
 class FullImage(Image):
     pass
@@ -31,6 +32,16 @@ def theme(theme):
         bgcolor = (0.84, 0.84, 0.84, 1)
     if theme=="d":
         bgcolor = (0.14, 0.14, 0.14, 1)
+    if theme=="lp":
+        bgcolor = (0.54,0.54,0.65,1)
+    if theme=="dp":
+        bgcolor =(0.14,0.14,0.25,1)
+    if theme=="b":
+        bgcolor =(0.14,0.24,0.55,1)
+    if theme =="db":
+        bgcolor = (0.14,0.24,0.85,1)
+    if theme == "r":
+        bgcolor = (0.68, 0.24, 0.24, 1)
 
     Window.clearcolor = bgcolor
 
@@ -112,7 +123,7 @@ def brightness(b):
         img = cv2.imread(x)
         beta = b
         print(beta)
-        bright = cv2.convertScaleAbs(img,alpha=1,beta=beta)
+        bright = cv2.convertScaleAbs(img,alpha=0.9,beta=beta)
         cv2.imwrite("colorized.jpg", bright)
         print("done")
     except:
@@ -192,7 +203,7 @@ class MainLayout(Widget):
         try:
             self.ids.image2.source = ""
             self.ids.image1.source = ""
-            bgcol="w"
+            bgcol="db"
             theme(bgcol)
         except:
             pass
@@ -245,6 +256,7 @@ class MainLayout(Widget):
 
 class Testapp(App):
     def build(self):
+        Window.clearcolor= (0.74, 0.74, 0.74, 1)
         return MainLayout()
 
 
