@@ -84,7 +84,6 @@ def colorizer(file):
 
 
 
-
 def saver(f):
     try:
         fmagex = f[0]
@@ -134,35 +133,6 @@ def contrast(c):
         print("done")
     except:
         print("contrast error")
-
-def hue(e):
-    try:
-        x = "colorized.jpg"
-        img = cv2.imread(x)
-        imghsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV).astype('float32')
-        h, s, v = cv2.split(imghsv)
-        h = h * (int(e))
-        h = np.clip(s, 0, 255)
-        imghsv = cv2.merge([h, s, v])
-        hueed = cv2.cvtColor(imghsv.astype('uint8'), cv2.COLOR_HSV2BGR)
-        cv2.imwrite("colorized.jpg", hueed)
-        print("done")
-    except:
-        print("hue error")
-
-
-def smooth(s):
-    try:
-        x = "colorized.jpg"
-        img = cv2.imread(x)
-        sigmas = s*2
-        sigmar = s/100
-        print(sigmar, sigmas)
-        smth= cv2.edgePreservingFilter(img,cv2.RECURS_FILTER, sigmas, sigmar)
-        cv2.imwrite("colorized.jpg",smth)
-        print("done")
-    except:
-        print("smooth error")
 
 
 
@@ -248,7 +218,7 @@ class MainLayout(Widget):
 
 class Colorizer(App):
     def build(self):
-        Window.clearcolor= (0.74, 0.74, 0.74, 1)
+        Window.clearcolor= (0.14, 0.24, 0.34, 1)
         return MainLayout()
 
 
