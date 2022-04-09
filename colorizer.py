@@ -1,20 +1,14 @@
 
 import kivy
 import io
-import time
 import os
 import numpy as np
 import cv2
-import random
 from kivy.app import App
-from kivy.properties import ColorProperty
-from kivy.uix.label import Label
 from kivy.uix.widget import Widget
 from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.uix.image import Image
-from kivy.clock import Clock
-
 
 
 Builder.load_file('colorizer_kv.kv')
@@ -230,9 +224,6 @@ class MainLayout(Widget):
 
 
 
-    def slide_it(self, *args):
-        print(args)
-
     def bright_slider(self, *args):
 
         x = int(args[1])
@@ -242,11 +233,6 @@ class MainLayout(Widget):
 
         x = int(args[1])
         contrast(x)
-
-    def hue_slider(self,*args):
-
-        x = int(args[1])/10
-        hue(x)
 
 
     def satu_slider(self, *args):
